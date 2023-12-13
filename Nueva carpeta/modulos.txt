@@ -1,0 +1,75 @@
+<script setup>
+
+import { ref } from 'vue';
+
+let indice = ref(0)
+
+let refcodigos = ref("")
+
+let codigos = ref([['XDADAL1', 'SDSADA1', 'SJDAD01'], ['UWASDAS'], ['ASDAD123']]);
+
+function addCodigo(indice){
+
+codigos.value[indice].push(refcodigos.value);
+
+}
+
+function deleteCodigo(indice, index){
+  codigos.value[indice].splice(index, 1);
+}
+
+
+
+</script>
+
+<template>
+
+  <div class="text-2xl font-bold text-center">SISTEMA DE TURNOS</div>
+
+  <div class="flex justify-between max-w-xl mx-auto">
+
+    <!-- IZQUIERDA -->
+    <div class="p-5">
+      <div class="bg-blue-500 text-white text-xl font-bold p-2 rounded-md">
+        MODULO 1
+      </div>
+      <div class="bg-gray-300 p-2 rounded-md">
+        <div v-for="(obj, index) in codigos[0]" :key="index">{{ obj }}</div>
+      </div>
+    </div>
+
+    <!-- MEDIO -->
+    <div class="p-5">
+      <div class="bg-orange-500 text-white text-xl font-bold p-2 rounded-md">
+        MODULO 2
+      </div>
+      <div class="bg-gray-300 p-2 rounded-md">
+        <div v-for="(obj, index) in codigos[1]" :key="index">{{ obj }}</div>
+      </div>
+    </div>
+
+
+<!-- DERECHA -->
+
+    <div class="p-5">
+      <div class="bg-green-800 text-xl text-white font-bold p-2 rounded-md">
+        MODULO 3
+      </div>
+      <div class="bg-gray-300 p-2 rounded-md">
+        <div v-for="(obj, index) in codigos[2]" :key="index">{{ obj }}</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="flex justify-between max-w-xl mx-auto gap-4">
+
+    <div>{{ codigos[0].length + codigos[1].length + codigos[2].length }}</div>
+    <div><input v-model="refcodigos" type="text" placeholder="INGRESE CODIGO"></div>
+    <div> <input v-model="indice" type="number" placeholder="MODULO"></div>
+    <div @click="addCodigo(indice)" class="bg-purple-600 text-white w-28 h-8 rounded-md p-2 text-center">Agregar turno</div>
+    <div @click="deleteCodigo(indice, index)" class="bg-red-500 text-white p-2 w-28 h-8 rounded-md">Borrar codigo</div>
+
+  </div>
+  
+</template>
